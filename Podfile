@@ -7,6 +7,7 @@ target 'TextFileSpike' do
 
   # Pods for TextFileSpike
   pod 'GoogleSignIn', '~> 4.4.0'
+  pod 'GoogleAPIClientForREST/Drive', '~> 1.3.7'
 
   target 'TextFileSpikeTests' do
     inherit! :search_paths

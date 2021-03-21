@@ -1,11 +1,16 @@
 import UIKit
 import GoogleSignIn
+import GoogleAPIClientForREST
+import GTMSessionFetcher
 
 class ViewController: UIViewController , GIDSignInDelegate, GIDSignInUIDelegate {
     let googleSignInButton:UIButton = UIButton(frame: CGRect(x: 500, y: 500, width: 200, height: 100))
+    let googleDriveService = GTLRDriveService()
+    var googleUser: GIDGoogleUser?
     
     override func viewDidLoad() {
         super.viewDidLoad()
+      
      
         /***** Configure Google Sign In *****/
       
@@ -13,6 +18,14 @@ class ViewController: UIViewController , GIDSignInDelegate, GIDSignInUIDelegate 
         
         // GIDSignIn.sharedInstance()?.signIn() will throw an exception if not set.
         GIDSignIn.sharedInstance()?.uiDelegate = self
+        
+        /*
+         specify the access scope on the GIDSignIn singleton object that manages the OAuth authentication and authorization flow
+         Adding the kGTLRAuthScopeDriveFile scope will ask the user to allow full Google Drive access (read and write) to your app during the OAuth flow.
+ 
+         */
+        GIDSignIn.sharedInstance()?.scopes =
+            [kGTLRAuthScopeDrive]
       
         // Attempt to renew a previously authenticated session without forcing the
         // user to go through the OAuth authentication flow.
@@ -67,6 +80,9 @@ class ViewController: UIViewController , GIDSignInDelegate, GIDSignInUIDelegate 
          How to Add Native iOS Google Sign In
          https://medium.com/@kgleong/how-to-add-native-ios-google-sign-in-8ef66c09006e
          
+         GoogleSignIn ios append to google sheets
+         https://stackoverflow.com/questions/52762379/googlesignin-ios-append-to-google-sheets
+         
          */
         
 //        let bundleID = Bundle.main.bundleIdentifier
@@ -74,6 +90,9 @@ class ViewController: UIViewController , GIDSignInDelegate, GIDSignInUIDelegate 
    
         // Start Google's OAuth authentication flow
        // GIDSignIn.sharedInstance()?.signIn()
+        
+        
+        
         
         
     
@@ -85,7 +104,20 @@ class ViewController: UIViewController , GIDSignInDelegate, GIDSignInUIDelegate 
 
     func sign(_ signIn: GIDSignIn!, didSignInFor user: GIDGoogleUser!, withError error: Error!) {
             // A nil error indicates a successful login
-            googleSignInButton.isHidden = error == nil
-        }
+        // A nil error indicates a successful login
+              if error == nil {
+                  // Include authorization headers/values with each Drive API request.
+                  self.googleDriveService.authorizer = user.authentication.fetcherAuthorizer()
+                  self.googleUser = user
+              } else {
+                  self.googleDriveService.authorizer = nil
+                  self.googleUser = nil
+              }
+        
+        
+        
+        
+        googleSignInButton.isHidden = error == nil
+    }
 }
 
