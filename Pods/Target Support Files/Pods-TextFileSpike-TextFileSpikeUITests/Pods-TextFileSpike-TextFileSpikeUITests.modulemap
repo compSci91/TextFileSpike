@@ -1,0 +1,6 @@
+framework module Pods_TextFileSpike_TextFileSpikeUITests {
+  umbrella header "Pods-TextFileSpike-TextFileSpikeUITests-umbrella.h"
+
+  export *
+  module * { export * }
+}
