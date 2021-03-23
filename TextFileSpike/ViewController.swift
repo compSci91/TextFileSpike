@@ -12,6 +12,8 @@ class ViewController: UIViewController, GIDSignInDelegate  {
     var googleUser: GIDGoogleUser?
     var uploadFolderID: String?
     var number:Int = 0
+    let sheetsService = GTLRSheetsService()
+
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -59,6 +61,9 @@ class ViewController: UIViewController, GIDSignInDelegate  {
 //         let familyName = user.profile.familyName
 //         let email = user.profile.email
         
+        sheetsService.authorizer = GIDSignIn.sharedInstance()?.currentUser.authentication.fetcherAuthorizer()
+
+        
         debugPrint("*******************************")
         debugPrint("Login was called!")
         debugPrint("*******************************")
@@ -75,16 +80,13 @@ class ViewController: UIViewController, GIDSignInDelegate  {
     
     
     func appendToGoogleSheets(_ values:[[String]]){
-        let sheetsService = GTLRSheetsService()
-        sheetsService.authorizer = GIDSignIn.sharedInstance()?.currentUser.authentication.fetcherAuthorizer()
         let spreadsheetId = "1UBW-T5YZ-iDTEi1j0hXaSouodJBEsmZnWaxJSZ9w1_A"
         let range = "Sheet1"
         let valueRange = GTLRSheets_ValueRange.init();
         valueRange.values = values
         number = number + 1
         
-        let query = GTLRSheetsQuery_SpreadsheetsValuesAppend
-            .query(withObject: valueRange, spreadsheetId:spreadsheetId, range:range)
+        let query = GTLRSheetsQuery_SpreadsheetsValuesAppend.query(withObject: valueRange, spreadsheetId:spreadsheetId, range:range)
         query.valueInputOption = "USER_ENTERED"
 
         sheetsService.executeQuery(query) { (ticket, any, error) in
