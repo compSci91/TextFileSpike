@@ -28,7 +28,7 @@ class ViewController: UIViewController, GIDSignInDelegate  {
         uploadButton.backgroundColor = .blue
         uploadButton.setTitle("Append Google Sheet", for: .normal)
         view.addSubview(uploadButton)
-        uploadButton.addTarget(self, action: #selector(appendToGoogleSheets), for: .touchUpInside)
+        uploadButton.addTarget(self, action: #selector(onButtonTap), for: .touchUpInside)
 
         
         
@@ -66,16 +66,21 @@ class ViewController: UIViewController, GIDSignInDelegate  {
 
     
     
-    @objc func appendToGoogleSheets(){
+    @objc func onButtonTap(){
+        appendToGoogleSheets([
+            ["Hello", "World", String(number)]
+        ]
+        )
+    }
+    
+    
+    func appendToGoogleSheets(_ values:[[String]]){
         let sheetsService = GTLRSheetsService()
         sheetsService.authorizer = GIDSignIn.sharedInstance()?.currentUser.authentication.fetcherAuthorizer()
         let spreadsheetId = "1UBW-T5YZ-iDTEi1j0hXaSouodJBEsmZnWaxJSZ9w1_A"
         let range = "Sheet1"
         let valueRange = GTLRSheets_ValueRange.init();
-        valueRange.values = [
-            ["Hello", "World", String(number)]
-        ]
-        
+        valueRange.values = values
         number = number + 1
         
         let query = GTLRSheetsQuery_SpreadsheetsValuesAppend
@@ -89,6 +94,7 @@ class ViewController: UIViewController, GIDSignInDelegate  {
             print(any)
             print(ticket)
         }
+
     }
     
     @objc private func onGoogleSignInButtonTap() {
