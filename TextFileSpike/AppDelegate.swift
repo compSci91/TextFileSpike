@@ -10,15 +10,12 @@ import GoogleSignIn
 
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate {
-
-
-
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
         GIDSignIn.sharedInstance()?.clientID = "363243949693-k4tk2l5gfuk939l7tig32gjr4k88mf5b.apps.googleusercontent.com"
-
         return true
     }
+    
 
     // MARK: UISceneSession Lifecycle
 
@@ -38,7 +35,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let sourceApplication = options[.sourceApplication] as? String
         let annotation = options[.annotation]
         
-        return GIDSignIn.sharedInstance()?.handle(url, sourceApplication: sourceApplication, annotation: annotation) ?? false
+//        return GIDSignIn.sharedInstance()?.handle(url, sourceApplication: sourceApplication, annotation: annotation) ?? false
+        return GIDSignIn.sharedInstance()?.handle(url) ?? false
+
     }
 
 
