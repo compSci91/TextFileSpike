@@ -19,13 +19,10 @@ class ViewController: UIViewController, GIDSignInDelegate  {
         super.viewDidLoad()
         GIDSignIn.sharedInstance().delegate = self
         GIDSignIn.sharedInstance()?.presentingViewController = self
-        GIDSignIn.sharedInstance()?.scopes.append(kGTLRAuthScopeSheetsSpreadsheets)
-        GIDSignIn.sharedInstance()?.scopes.append(kGTLRAuthScopeSheetsDrive)
+
         GIDSignIn.sharedInstance()?.restorePreviousSignIn()
         
         view.addSubview(signInButton)
-
-        GIDSignIn.sharedInstance()?.scopes = [kGTLRAuthScopeDrive]
       
         uploadButton.backgroundColor = .blue
         uploadButton.setTitle("Append Google Sheet", for: .normal)
