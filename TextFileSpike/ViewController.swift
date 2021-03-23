@@ -11,6 +11,7 @@ class ViewController: UIViewController, GIDSignInDelegate  {
     let googleDriveService = GTLRDriveService()
     var googleUser: GIDGoogleUser?
     var uploadFolderID: String?
+    var number:Int = 0
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -18,32 +19,16 @@ class ViewController: UIViewController, GIDSignInDelegate  {
         GIDSignIn.sharedInstance()?.presentingViewController = self
         GIDSignIn.sharedInstance()?.scopes.append(kGTLRAuthScopeSheetsSpreadsheets)
         GIDSignIn.sharedInstance()?.scopes.append(kGTLRAuthScopeSheetsDrive)
-        
-
-         // Automatically sign in the user.
-         GIDSignIn.sharedInstance()?.restorePreviousSignIn()
+        GIDSignIn.sharedInstance()?.restorePreviousSignIn()
         
         view.addSubview(signInButton)
 
-     
-        /***** Configure Google Sign In *****/
-      
-        
-        // GIDSignIn.sharedInstance()?.signIn() will throw an exception if not set.
-       // GIDSignIn.sharedInstance()?.uiDelegate = self
-        
-        /*
-         specify the access scope on the GIDSignIn singleton object that manages the OAuth authentication and authorization flow
-         Adding the kGTLRAuthScopeDriveFile scope will ask the user to allow full Google Drive access (read and write) to your app during the OAuth flow.
- 
-         */
-        GIDSignIn.sharedInstance()?.scopes =
-            [kGTLRAuthScopeDrive]
+        GIDSignIn.sharedInstance()?.scopes = [kGTLRAuthScopeDrive]
       
         uploadButton.backgroundColor = .blue
-        uploadButton.setTitle("Upload File", for: .normal)
+        uploadButton.setTitle("Append Google Sheet", for: .normal)
         view.addSubview(uploadButton)
-        uploadButton.addTarget(self, action: #selector(onUploadButtonTap), for: .touchUpInside)
+        uploadButton.addTarget(self, action: #selector(appendToGoogleSheets), for: .touchUpInside)
 
         
         
@@ -75,39 +60,23 @@ class ViewController: UIViewController, GIDSignInDelegate  {
 //         let email = user.profile.email
         
         debugPrint("*******************************")
-        debugPrint("Sign was called!")
+        debugPrint("Login was called!")
         debugPrint("*******************************")
     }
 
     
     
-    @objc func onUploadButtonTap(){
-         //populateFolderID()
-         uploadMyFile()
-    }
-    
-    func uploadMyFile() {
-            let fileURL = Bundle.main.url(forResource: "my-image", withExtension: ".png")
-        
-            uploadFile(
-                name: "my-image.png",
-                folderID: "",
-                fileURL: fileURL!,
-                mimeType: "image/png",
-                service: googleDriveService)
-    }
-    
-    
-    func uploadFile(name: String, folderID: String, fileURL: URL, mimeType: String, service: GTLRDriveService) {
-        
+    @objc func appendToGoogleSheets(){
         let sheetsService = GTLRSheetsService()
         sheetsService.authorizer = GIDSignIn.sharedInstance()?.currentUser.authentication.fetcherAuthorizer()
         let spreadsheetId = "1UBW-T5YZ-iDTEi1j0hXaSouodJBEsmZnWaxJSZ9w1_A"
         let range = "Sheet1"
         let valueRange = GTLRSheets_ValueRange.init();
         valueRange.values = [
-            ["Hello", "World"]
+            ["Hello", "World", String(number)]
         ]
+        
+        number = number + 1
         
         let query = GTLRSheetsQuery_SpreadsheetsValuesAppend
             .query(withObject: valueRange, spreadsheetId:spreadsheetId, range:range)
