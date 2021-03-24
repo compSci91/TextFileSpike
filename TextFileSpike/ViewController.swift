@@ -69,10 +69,7 @@ class ViewController: UIViewController, GIDSignInDelegate  {
     
     
     @objc func onButtonTap(){
-        appendToGoogleSheets([
-            ["Hello", "World", String(number)]
-        ]
-        )
+        appendToGoogleSheets([["Hello", "World", String(number)]])
     }
     
     
@@ -119,5 +116,10 @@ class ViewController: UIViewController, GIDSignInDelegate  {
  GoogleSignIn ios append to google sheets
  https://stackoverflow.com/questions/52762379/googlesignin-ios-append-to-google-sheets
  
+ GoogleSignIn ios append to google sheets
+ https://stackoverflow.com/questions/52762379/googlesignin-ios-append-to-google-sheets
+ 
+ Updating specific row in iOS Swift using Google SpreadSheet API
+ https://stackoverflow.com/questions/51585042/updating-specific-row-in-ios-swift-using-google-spreadsheet-api
  */
 
