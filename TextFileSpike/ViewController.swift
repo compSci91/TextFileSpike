@@ -19,10 +19,18 @@ class ViewController: UIViewController, GIDSignInDelegate  {
         super.viewDidLoad()
         GIDSignIn.sharedInstance().delegate = self
         GIDSignIn.sharedInstance()?.presentingViewController = self
+        
+        GIDSignIn.sharedInstance()?.scopes.append(kGTLRAuthScopeSheetsSpreadsheets)
+        GIDSignIn.sharedInstance()?.scopes =
+                   [kGTLRAuthScopeDrive]
+//        GIDSignIn.sharedInstance()?.scopes.append(kGTLRAuthScopeSheetsDrive)
 
         GIDSignIn.sharedInstance()?.restorePreviousSignIn()
         
         view.addSubview(signInButton)
+        
+//        GIDSignIn.sharedInstance()?.scopes =
+//            [kGTLRAuthScopeDrive]
       
         uploadButton.backgroundColor = .blue
         uploadButton.setTitle("Append Google Sheet", for: .normal)
@@ -121,5 +129,20 @@ class ViewController: UIViewController, GIDSignInDelegate  {
  
  Updating specific row in iOS Swift using Google SpreadSheet API
  https://stackoverflow.com/questions/51585042/updating-specific-row-in-ios-swift-using-google-spreadsheet-api
+ 
+ 
+ Connectiong sheets api in swift
+ http://berkolcay.blogspot.com/2018/12/connecting-sheets-ap-in-swift-step-by.html
+
+ Make sure to publish the app!
+ 
+ Uploading Files to Google Drive using the Google iOS SDK
+ https://medium.com/@kgleong/uploading-files-to-google-drive-using-the-google-ios-sdk-fcad3e9d6c07
+ 
+ How to Add Native iOS Google Sign In
+ https://medium.com/@kgleong/how-to-add-native-ios-google-sign-in-8ef66c09006e
+ 
+ Try Sign-In for iOS
+ https://developers.google.com/identity/sign-in/ios/start?ver=swift
  */
 

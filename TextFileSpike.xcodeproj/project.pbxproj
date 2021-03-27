@@ -19,6 +19,7 @@
 		CCBBB614260797AB00F4F5EA /* TextFileSpikeTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCBBB613260797AB00F4F5EA /* TextFileSpikeTests.swift */; };
 		CCBBB61F260797AB00F4F5EA /* TextFileSpikeUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCBBB61E260797AB00F4F5EA /* TextFileSpikeUITests.swift */; };
 		CCBBB65E2607FEFD00F4F5EA /* my-image.png in Resources */ = {isa = PBXBuildFile; fileRef = CCBBB65D2607FEFD00F4F5EA /* my-image.png */; };
+		CCF5467D260FB0580096ED91 /* client_363243949693-k4tk2l5gfuk939l7tig32gjr4k88mf5b.apps.googleusercontent.com.plist in Resources */ = {isa = PBXBuildFile; fileRef = CCF5467C260FB0580096ED91 /* client_363243949693-k4tk2l5gfuk939l7tig32gjr4k88mf5b.apps.googleusercontent.com.plist */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -63,6 +64,7 @@
 		CCBBB61E260797AB00F4F5EA /* TextFileSpikeUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextFileSpikeUITests.swift; sourceTree = "<group>"; };
 		CCBBB620260797AB00F4F5EA /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		CCBBB65D2607FEFD00F4F5EA /* my-image.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "my-image.png"; sourceTree = "<group>"; };
+		CCF5467C260FB0580096ED91 /* client_363243949693-k4tk2l5gfuk939l7tig32gjr4k88mf5b.apps.googleusercontent.com.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "client_363243949693-k4tk2l5gfuk939l7tig32gjr4k88mf5b.apps.googleusercontent.com.plist"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -118,6 +120,7 @@
 		CCBBB5FB260797A800F4F5EA /* TextFileSpike */ = {
 			isa = PBXGroup;
 			children = (
+				CCF5467C260FB0580096ED91 /* client_363243949693-k4tk2l5gfuk939l7tig32gjr4k88mf5b.apps.googleusercontent.com.plist */,
 				CCBBB65D2607FEFD00F4F5EA /* my-image.png */,
 				CCBBB5FC260797A800F4F5EA /* AppDelegate.swift */,
 				CCBBB5FE260797A800F4F5EA /* SceneDelegate.swift */,
@@ -283,6 +286,7 @@
 			files = (
 				CCBBB609260797AB00F4F5EA /* LaunchScreen.storyboard in Resources */,
 				CCBBB65E2607FEFD00F4F5EA /* my-image.png in Resources */,
+				CCF5467D260FB0580096ED91 /* client_363243949693-k4tk2l5gfuk939l7tig32gjr4k88mf5b.apps.googleusercontent.com.plist in Resources */,
 				CCBBB606260797AB00F4F5EA /* Assets.xcassets in Resources */,
 				CCBBB604260797A800F4F5EA /* Main.storyboard in Resources */,
 			);
